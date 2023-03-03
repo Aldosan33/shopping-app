@@ -30,7 +30,7 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         push: true
-        tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_c6a4693eb4924fb296296e047cb5d26a }}/aldosan33/shoppingappclient:${{ github.sha }}
+        tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_c6a4693eb4924fb296296e047cb5d26a }}/aldosan33/shoppingappclient:latest
         file: ./shopping-app/ShoppingApp.Client/Dockerfile
 
   deploy:
@@ -48,4 +48,4 @@ jobs:
         app-name: 'aldosan-shopping-app'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_6b4f6843c028431fa9f5d43af7d45fcc }}
-        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_c6a4693eb4924fb296296e047cb5d26a }}/aldosan33/shoppingappclient:${{ github.sha }}'
+        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_c6a4693eb4924fb296296e047cb5d26a }}/aldosan33/shoppingappclient:latest'
