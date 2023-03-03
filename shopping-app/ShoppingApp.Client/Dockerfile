@@ -5,7 +5,7 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["ShoppingApp.Client/ShoppingApp.Client.csproj", "ShoppingApp.Client/"]
+COPY ["ShoppingApp.Client.csproj", "ShoppingApp.Client/"]
 RUN dotnet restore "ShoppingApp.Client/ShoppingApp.Client.csproj"
 COPY . .
 WORKDIR "/src/ShoppingApp.Client"
