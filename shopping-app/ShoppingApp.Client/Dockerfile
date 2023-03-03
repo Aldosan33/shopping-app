@@ -8,7 +8,7 @@ WORKDIR /src
 COPY ["shopping-app/ShoppingApp.Client/ShoppingApp.Client.csproj", "ShoppingApp.Client/"]
 RUN dotnet restore "ShoppingApp.Client/ShoppingApp.Client.csproj"
 COPY . .
-WORKDIR "/src/ShoppingApp.Client"
+WORKDIR "/src/shopping-app/ShoppingApp.Client"
 RUN dotnet build "ShoppingApp.Client.csproj" -c Release -o /app/build
 
 FROM build AS publish
