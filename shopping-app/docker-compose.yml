@@ -26,7 +26,7 @@ services:
             - "5100:80"
         environment:
             - ASPNETCORE_ENVIRONMENT=Development
-            - "ShoppingAppApiUrl=https://shoppingappapi:5000"
+            - "ShoppingAppApiUrl=http://shoppingappapi"
         depends_on:
             - shopping-api     
 
