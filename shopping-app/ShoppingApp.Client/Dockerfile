@@ -1,14 +1,14 @@
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
 EXPOSE 80
-EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["shopping-app/ShoppingApp.Client/ShoppingApp.Client.csproj", "ShoppingApp.Client/"]
+COPY ["ShoppingApp.Client.csproj", "ShoppingApp.Client/"]
 RUN dotnet restore "ShoppingApp.Client/ShoppingApp.Client.csproj"
-COPY . .
-WORKDIR "/src/shopping-app/ShoppingApp.Client"
+COPY . ./ShoppingApp.Client
+
+WORKDIR "/src/ShoppingApp.Client"
 RUN dotnet build "ShoppingApp.Client.csproj" -c Release -o /app/build
 
 FROM build AS publish

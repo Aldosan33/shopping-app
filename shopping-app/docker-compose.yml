@@ -1,0 +1,40 @@
+version: '3.4'
+
+services:
+    shopping-api:
+        image: aldosan33/shoppingappapi
+        container_name: shoppingappapi
+        build:
+            context: .
+            dockerfile: ShoppingApp.Api/Dockerfile
+        ports:
+            - "5000:80"
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Development
+            - "DatabaseSettings:ConnectionString=mongodb://shoppingmongodb:27017"
+        depends_on:
+            - shopping-mongodb
+
+            
+    shopping-client:
+        image: aldosan33/shoppingappclient
+        container_name: shoppingappclient
+        build:
+            context: .
+            dockerfile: ShoppingApp.Client/Dockerfile
+        ports:
+            - "5100:80"
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Development
+            - "ShoppingAppApiUrl=https://shoppingappapi:5000"
+        depends_on:
+            - shopping-api     
+
+    shopping-mongodb:
+        image: mongo
+        container_name: shoppingmongodb
+        restart: always
+        ports:
+          - "27017:27017"
+        volumes:
+          - ${WEBAPP_STORAGE_HOME}/site:/data/db
