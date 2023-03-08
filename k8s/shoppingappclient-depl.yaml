@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shoppingappclient-depl
+  labels:
+    app: shoppingappclient
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shoppingappclient
+  template:
+    metadata:
+      labels:
+        app: shoppingappclient
+    spec:
+      containers:
+        - name: shoppingappclient
+          image: aldosan33/shoppingappclient
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: Development
+            - name: ShoppingAppApiUrl
+              valueFrom:
+                configMapKeyRef:
+                  name: shoppingappapi-cfgmap
+                  key: shoppingappapi_url
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: shoppingappclient-srv
+spec:
+  type: NodePort
+  selector:
+    app: shoppingappclient
+  ports:
+    - protocol: TCP
+      port: 5100
+      targetPort: 80
+      nodePort: 31000

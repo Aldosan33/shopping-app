@@ -41,11 +41,11 @@ spec:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: mongodb
+  name: mongodb-sct
 type: Opaque
 data:
-  mongodb-root-username: dXNlcm5hbWU=
-  mongodb-root-password: cGFzc3dvcmQ=
+  mongodb-root-username: QWRvbmlz
+  mongodb-root-password: UGFzc3dvcmQkMjAyMw==
 ---
 apiVersion: v1
 kind: Service
@@ -58,4 +58,13 @@ spec:
     - protocol: TCP
       port: 27017
       targetPort: 27017
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mongodb-cfgmap
+data:
+  mongodb_connection_string: mongodb://Adonis:Password$2023@mongodb-srv:27017
+
+
 
