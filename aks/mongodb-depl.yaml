@@ -44,8 +44,8 @@ metadata:
   name: mongodb-secret
 type: Opaque
 data:
-  mongodb-root-username: QWRvbmlz
-  mongodb-root-password: UGFzc3dvcmQkMjAyMw==
+  mongodb-root-username: QWRvbmlz # Adonis (encoded) -> secrets in k8s should be always encoded
+  mongodb-root-password: UGFzc3dvcmQkMjAyMw== # Password$2023 (encoded)
 ---
 apiVersion: v1
 kind: Service

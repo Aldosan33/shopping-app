@@ -1,0 +1,25 @@
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: shoppingappapi-hpa
+spec:
+  maxReplicas: 10
+  minReplicas: 2
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: shoppingappapi-depl
+  targetCPUUtilizationPercentage: 50 # target CPU utilization
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: shoppingappclient-hpa
+spec:
+  maxReplicas: 10
+  minReplicas: 2
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: shoppingappclient-depl
+  targetCPUUtilizationPercentage: 50 # target CPU utilization
